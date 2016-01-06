@@ -5,4 +5,5 @@
     <string name="login_cancel_text">Login Cancelled</string>
     <string name="login_error_text">There was an while error logging in. Please try again.</string>
     <string name="notification_action_text">View Profile</string>
+    <string name="menu_logout">Logout</string>
 </resources>
