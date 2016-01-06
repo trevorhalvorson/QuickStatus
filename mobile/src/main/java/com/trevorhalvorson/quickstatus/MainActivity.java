@@ -4,17 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.FacebookSdkNotInitializedException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 
@@ -41,32 +36,13 @@ public class MainActivity extends AppCompatActivity {
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-            ImageView profileImage = (ImageView) findViewById(R.id.facebook_profile_image);
             TextView profileName = (TextView) findViewById(R.id.facebook_name);
-
             profileName.setText(Profile.getCurrentProfile().getName());
+
+            ImageView profileImage = (ImageView) findViewById(R.id.facebook_profile_image);
             Glide.with(this)
                     .load(Profile.getCurrentProfile().getProfilePictureUri(50, 50))
                     .into(profileImage);
-
-            if (getIntent() != null && getIntent().getStringExtra(MobileListenerService.MESSAGE_EXTRA) != null) {
-                String post = getIntent().getStringExtra(MobileListenerService.MESSAGE_EXTRA);
-
-                Bundle params = new Bundle();
-                params.putString("message", post);
-                new GraphRequest(
-                        AccessToken.getCurrentAccessToken(),
-                        "/me/feed",
-                        params,
-                        HttpMethod.POST,
-                        new GraphRequest.Callback() {
-                            public void onCompleted(GraphResponse response) {
-                                Log.i(TAG, "onCompleted: " + response.getRawResponse());
-                            }
-                        }
-                ).executeAsync();
-
-            }
         }
     }
 

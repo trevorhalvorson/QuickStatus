@@ -2,4 +2,6 @@
     <string name="app_name">Quick Status</string>
     <string name="facebook_profile_image">Profile Photo</string>
     <string name="title_activity_login">Login</string>
+    <string name="login_cancel_text">Login Cancelled</string>
+    <string name="login_error_text">There was an while error logging in. Please try again.</string>
 </resources>

@@ -15,6 +15,7 @@ import com.facebook.login.widget.LoginButton;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String PERMISSIONS = "publish_actions";
+    
     private CallbackManager callbackManager;
 
     @Override
@@ -24,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Facebook
         callbackManager = CallbackManager.Factory.create();
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -41,13 +41,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancel() {
-                        Snackbar.make(findViewById(R.id.login_layout), "Login Cancelled", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(findViewById(R.id.login_layout), R.string.login_cancel_text, Snackbar.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onError(FacebookException error) {
-                        error.printStackTrace();
-                        Snackbar.make(findViewById(R.id.login_layout), "Error: " + error.getMessage(), Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(findViewById(R.id.login_layout), R.string.login_error_text, Snackbar.LENGTH_LONG).show();
                     }
                 });
 
