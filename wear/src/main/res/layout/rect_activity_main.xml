@@ -22,9 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:src="@drawable/ic_full_cancel"
-            app:circle_border_color="@color/colorPrimary"
+            app:circle_border_color="@color/red"
             app:circle_border_width="@dimen/circle_border_normal_width"
-            app:circle_color="@color/red"
+            app:circle_color="@color/dark_red"
             app:circle_padding="@dimen/circle_padding"
             app:circle_radius="@dimen/circle_radius"
             app:circle_radius_pressed="@dimen/circle_radius_pressed"/>
