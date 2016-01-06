@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="com.trevorhalvorson.quickstatus.MainActivity"
-              tools:deviceIds="wear_square">
+<android.support.wearable.view.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="16dp"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear_rect">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_square"/>
-</LinearLayout>
+    <android.support.wearable.view.WearableFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_box="top">
+
+        <android.support.wearable.view.DelayedConfirmationView
+            android:id="@+id/delayed_confirmation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:src="@drawable/ic_full_cancel"
+            app:circle_border_color="@color/colorPrimary"
+            app:circle_border_width="@dimen/circle_border_normal_width"
+            app:circle_color="@color/red"
+            app:circle_padding="@dimen/circle_padding"
+            app:circle_radius="@dimen/circle_radius"
+            app:circle_radius_pressed="@dimen/circle_radius_pressed"/>
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:padding="16dp"
+            android:text="@string/status_text"
+            android:textColor="@color/primary_text_light"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/message_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="top"
+            android:textColor="@color/primary_text_light"
+            android:textSize="14sp"/>
+    </android.support.wearable.view.WearableFrameLayout>
+</android.support.wearable.view.BoxInsetLayout>

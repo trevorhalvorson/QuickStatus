@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Quick Status</string>
-    <string name="hello_round">Hello Round World!</string>
-    <string name="hello_square">Hello Square World!</string>
+    <string name="message_success">Status updated successfully</string>
+    <string name="message_failure">There was an issue updating your status. Please try again.</string>
+    <string name="timer_finished_text">Success</string>
+    <string name="status_text">Submitting…</string>
 </resources>
