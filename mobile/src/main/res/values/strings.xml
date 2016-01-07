@@ -6,4 +6,7 @@
     <string name="login_error_text">There was an while error logging in. Please try again.</string>
     <string name="notification_action_text">View Profile</string>
     <string name="menu_logout">Logout</string>
+    <string name="post_success_notification_title">Facebook post successful</string>
+    <string name="post_error_notification_title">Error publishing post</string>
+    <string name="post_error_notification_content">An error occurred while attempting to post to Facebook.</string>
 </resources>
