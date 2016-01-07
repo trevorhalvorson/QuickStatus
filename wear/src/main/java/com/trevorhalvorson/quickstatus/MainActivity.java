@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.wearable.activity.ConfirmationActivity;
 import android.support.wearable.view.DelayedConfirmationView;
 import android.support.wearable.view.WatchViewStub;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,15 +91,18 @@ public class MainActivity extends Activity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
-            List<String> results = data.getStringArrayListExtra(
-                    RecognizerIntent.EXTRA_RESULTS);
-            String spokenText = results.get(0);
+        if (requestCode == SPEECH_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                List<String> results = data.getStringArrayListExtra(
+                        RecognizerIntent.EXTRA_RESULTS);
+                String spokenText = results.get(0);
 
-            mMessageText.setText(spokenText);
+                mMessageText.setText(spokenText);
 
-            startConfirmationTimer();
-
+                startConfirmationTimer();
+            } else {
+                finish();
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
