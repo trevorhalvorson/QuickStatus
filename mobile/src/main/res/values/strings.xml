@@ -2,7 +2,7 @@
     <string name="app_name">Quick Status</string>
     <string name="facebook_profile_image">Profile Photo</string>
     <string name="title_activity_login">Login</string>
-    <string name="login_cancel_text">Login Cancelled</string>
+    <string name="permission_description_text">Quick Status needs your permission to post statuses from this app in order to allow you to create posts from your Wear device.</string>
     <string name="login_error_text">There was an while error logging in. Please try again.</string>
     <string name="notification_action_text">View Profile</string>
     <string name="menu_logout">Logout</string>

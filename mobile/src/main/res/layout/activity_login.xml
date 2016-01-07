@@ -10,32 +10,32 @@
     android:padding="32dp"
     tools:context="com.trevorhalvorson.quickstatus.LoginActivity">
 
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="32dp"
+        android:text="Welcome to Quick Status \n for Android Wear"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/welcome_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:padding="32dp"
-            android:text="Welcome to Quick Status \n for Android Wear"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"/>
+        android:layout_height="match_parent"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/detail_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/welcome_text"
             android:layout_centerHorizontal="true"
             android:padding="32dp"
-            android:text="Post on your wall from your wrist!"
+            android:text="Quick Status gives you the power to publish posts from your wrist!"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="16sp"/>
+            android:textSize="24sp"/>
 
         <TextView
             android:layout_width="wrap_content"
