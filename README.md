@@ -1,10 +1,13 @@
 # Quick Status for Android Wear
 
 
+Quick Status lets you post to Facebook using your Android Wear device.
+
+
+## Screenshots
+
+
 ![ScreenShot](/screenshots/web_icon.png)
-
-
-Quick Status lets you post to Facebook using your Android Wear device
 
 
 ![ScreenShot](/screenshots/wear_square_screenshot.png)
