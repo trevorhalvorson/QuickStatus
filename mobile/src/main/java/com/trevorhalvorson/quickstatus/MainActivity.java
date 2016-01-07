@@ -8,8 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.facebook.FacebookSdk;
-import com.facebook.FacebookSdkNotInitializedException;
+import com.facebook.AccessToken;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
@@ -22,15 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try {
-            Profile.getCurrentProfile();
-        } catch (FacebookSdkNotInitializedException e) {
-            FacebookSdk.sdkInitialize(getApplicationContext());
-        }
-
-        if (Profile.getCurrentProfile() == null) {
-            logout();
-        } else {
+        if (isLoggedIn()) {
             // User is logged in to Facebook
             setContentView(R.layout.activity_main);
 
@@ -43,7 +34,14 @@ public class MainActivity extends AppCompatActivity {
 
             TextView profileName = (TextView) findViewById(R.id.facebook_name);
             profileName.setText(Profile.getCurrentProfile().getName());
+        } else {
+            navigateToLogin();
         }
+    }
+
+    private boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
     }
 
     private void logout() {

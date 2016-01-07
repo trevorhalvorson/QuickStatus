@@ -76,7 +76,7 @@ public class MobileListenerService extends WearableListenerService {
         super.onMessageReceived(messageEvent);
     }
 
-    public boolean isLoggedIn() {
+    private boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
     }
