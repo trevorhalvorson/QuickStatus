@@ -31,11 +31,11 @@ public class MainActivity extends Activity
     private static final int SPEECH_REQUEST_CODE = 0;
     private static final int NUM_SECONDS = 5;
 
-    private GoogleApiClient mGoogleApiClient;
+    private GoogleApiClient googleApiClient;
 
-    private TextView mMessageText;
-    private TextView mStatusText;
-    private DelayedConfirmationView mDelayedConfirmationView;
+    private TextView messageText;
+    private TextView statusText;
+    private DelayedConfirmationView delayedConfirmationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +45,20 @@ public class MainActivity extends Activity
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                mMessageText = (TextView) stub.findViewById(R.id.message_text);
+                messageText = (TextView) stub.findViewById(R.id.message_text);
 
-                mStatusText = (TextView) stub.findViewById(R.id.status_text);
-                mStatusText.setVisibility(View.INVISIBLE);
+                statusText = (TextView) stub.findViewById(R.id.status_text);
+                statusText.setVisibility(View.INVISIBLE);
 
-                mDelayedConfirmationView = (DelayedConfirmationView) stub.findViewById(R.id.delayed_confirmation);
-                mDelayedConfirmationView.setTotalTimeMs(NUM_SECONDS * 1000);
-                mDelayedConfirmationView.setListener(MainActivity.this);
-                mDelayedConfirmationView.setVisibility(View.INVISIBLE);
+                delayedConfirmationView = (DelayedConfirmationView) stub.findViewById(R.id.delayed_confirmation);
+                delayedConfirmationView.setTotalTimeMs(NUM_SECONDS * 1000);
+                delayedConfirmationView.setListener(MainActivity.this);
+                delayedConfirmationView.setVisibility(View.INVISIBLE);
             }
         });
 
         // Setup the google api client that will be used to send the message back to the mobile
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Wearable.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -68,19 +68,19 @@ public class MainActivity extends Activity
     @Override
     protected void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+        googleApiClient.connect();
     }
 
     @Override
     protected void onStop() {
-        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
+        if (googleApiClient != null && googleApiClient.isConnected()) {
+            googleApiClient.disconnect();
         }
         super.onStop();
     }
 
     private void getUserSpeech() {
-        if (mGoogleApiClient.isConnected()) {
+        if (googleApiClient.isConnected()) {
             Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -96,7 +96,7 @@ public class MainActivity extends Activity
                         RecognizerIntent.EXTRA_RESULTS);
                 String spokenText = results.get(0);
 
-                mMessageText.setText(spokenText);
+                messageText.setText(spokenText);
 
                 startConfirmationTimer();
             } else {
@@ -107,15 +107,15 @@ public class MainActivity extends Activity
     }
 
     private void startConfirmationTimer() {
-        mStatusText.setVisibility(View.VISIBLE);
+        statusText.setVisibility(View.VISIBLE);
 
-        mDelayedConfirmationView.setVisibility(View.VISIBLE);
-        mDelayedConfirmationView.start();
+        delayedConfirmationView.setVisibility(View.VISIBLE);
+        delayedConfirmationView.start();
     }
 
     @Override
     public void onTimerFinished(View view) {
-        new SendMessageToDataLayer(WEARABLE_DATA_PATH, mMessageText.getText().toString()).start();
+        new SendMessageToDataLayer(WEARABLE_DATA_PATH, messageText.getText().toString()).start();
 
         Intent intent = new Intent(this, ConfirmationActivity.class);
         intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE, ConfirmationActivity.SUCCESS_ANIMATION);
@@ -136,10 +136,10 @@ public class MainActivity extends Activity
     }
 
     private void resetUI() {
-        mDelayedConfirmationView.reset();
-        mDelayedConfirmationView.setVisibility(View.INVISIBLE);
+        delayedConfirmationView.reset();
+        delayedConfirmationView.setVisibility(View.INVISIBLE);
 
-        mStatusText.setVisibility(View.INVISIBLE);
+        statusText.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -169,11 +169,11 @@ public class MainActivity extends Activity
         @Override
         public void run() {
             NodeApi.GetConnectedNodesResult nodesList =
-                    Wearable.NodeApi.getConnectedNodes(mGoogleApiClient).await();
+                    Wearable.NodeApi.getConnectedNodes(googleApiClient).await();
             for (Node node : nodesList.getNodes()) {
                 MessageApi.SendMessageResult messageResult =
                         Wearable.MessageApi
-                                .sendMessage(mGoogleApiClient, node.getId(), mPath, mMessage.getBytes())
+                                .sendMessage(googleApiClient, node.getId(), mPath, mMessage.getBytes())
                                 .await();
 
                 // There was an error posting to Facebook
